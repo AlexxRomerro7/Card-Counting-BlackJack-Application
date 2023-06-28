@@ -11,100 +11,100 @@ def introduction_page():
 
 def tutorial_page():
     """Switches the introduction page to the tuturial page in which Card Counting instructions are given."""
-   pass
+    pass
 
 def game_page():
     """Switches to main game page where the user will be actively playing BlackJack."""
-   pass
+    pass
 
 def hint_button():
     """Button that displays the current count value of the deck."""
-   pass
+    pass
 
 def tutorial_button():
     """Button that gives brief tutorial on card counting, readily available for the user at all times."""
-   pass
+    pass
 
 def create_deck():
     """Gives the user a new deck, should be called upon in any function where cards are dealt."""
-   pass
+    pass
 
 def card_values():
     """Assigns values to all cards that are dealt out."""
-   pass
+    pass
 
 def card_faces():
     """Assigns card faces to each card dealt."""
-   pass
+    pass
 
 def face_down_card():
     """Runs code for the Dealer's faced down card"""
-   pass
+    pass
 
 def place_bets():
     """Locks user into placing a bet without access to any other buttons without a bet."""
-   pass
+    pass
 
 def bet_change():
     """Changes display of how much the user has bet upon final bet."""
-   pass
+    pass
 
 def money_change():
     """Changes display of money left."""
-   pass
+    pass
 
 def bet1():
     """Increases bet value by $1."""
-   pass
+    pass
 
 def bet5():
     """Increases bet value by $5."""
-   pass
+    pass
 
 def bet10():
     """Increase bet value by $10."""
-   pass
+    pass
 
 def bet25():
     """Increase bet value by $25."""
-   pass
+    pass
 
 def bet100():
     """Increase bet value by $100."""
-   pass
+    pass
 
 def deal_cards():
     """Initiates game play by dealing 2 card to each player. 1 dealer card face down."""
-   pass
+    pass
 
 def stand():
     """User choice of no longer receiving cards, initializing dealer play and halting all player buttons."""
-   pass
+    pass
 
 def player_hit():
     """Gives the user one more card."""
-   pass
+    pass
 
 def dealer_hit():
     """Allows dealer to hit IF the dealer respective value is less than 17."""
-   pass
+    pass
 
 def busted():
     """Checks for both Player and Dealer bust upon Stand or Hit"""
-   pass
+    pass
 
 def blackjack():
     """Checks for Blackjack for both the Player and Dealer"""
-   pass
+    pass
 
 def winner():
     """Checks for who won the game if Blackjack isn't achieved by Player or Dealer"""
-   pass
+    pass
 
 def dealer_card_reveal():
     """Displays the turned over Dealer card as its respective card"""
-   pass
+    pass
 
 def game_results():
-    """Gives a pop up window showing game results"""
-   pass
+    """Gives a pop up window showing game results"""  
+    pass
