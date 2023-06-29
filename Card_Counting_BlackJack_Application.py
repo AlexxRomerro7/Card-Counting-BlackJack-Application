@@ -1,20 +1,16 @@
 # Alex Romero
 # Created on 6/28/2023
+import sys  
+print(sys.executable)
 
 # Import Random for the random selection of cards when dealing. Import TKinter for GUI
 import random
+import tkinter
 from tkinter import *
-
-def introduction_page():
-    """This is the initial function that will be called upon to initialize the application through tkinter."""
-    pass
-
-def tutorial_page():
-    """Switches the introduction page to the tuturial page in which Card Counting instructions are given."""
-    pass
+from PIL import Image, ImageTk
+from tkinter import ttk, font
 
 def game_page():
-    """Switches to main game page where the user will be actively playing BlackJack."""
     pass
 
 def hint_button():
@@ -108,3 +104,38 @@ def dealer_card_reveal():
 def game_results():
     """Gives a pop up window showing game results"""  
     pass
+
+def tutorial_page():
+    """Switches the introduction page to the tuturial page in which Card Counting instructions are given."""
+
+def __init__():
+    """This is the initial function that will be called upon to initialize the application through tkinter."""
+    # Make all buttons global for deletion in next functions
+    global window, background_label_intro, button_intro
+
+    # Create the Tkinter window and give it its repective properties. Window title, background image, text (button)
+    window = Tk()
+    window.title('Card Counting Boot Camp Tutorial')
+    window.geometry('1200x720')
+    background_image_intro = Image.open('C:/Users/alexr/Pictures/CardsOnTable.jpg')
+    background_image_intro = background_image_intro.resize((1200, 720))
+    background_intro = ImageTk.PhotoImage(background_image_intro)
+    background_label_intro = Label(window, image=background_intro)
+    background_label_intro.place(x=0, y=0, relwidth=1, relheight=1)
+
+    button_intro = Button(window,
+                        font='Lato',
+                        background='#004000', fg='white',
+                        text=   'Welcome to Card Counting Boot Camp!\n'
+                                'You should already have an understanding of how\n'
+                                'to play BlackJack\n'
+                                '\n'
+                                'This program simply exists to help you win more money\n'
+                                '(click to continue)',
+                        command = tutorial_page())
+    button_intro.place(x=400, y=200)
+
+    # Call window to run tkinter
+    window.mainloop()
+
+__init__()
