@@ -9,6 +9,7 @@ import tkinter
 from tkinter import *
 from PIL import Image, ImageTk
 from tkinter import ttk, font
+import os
 
 def game_page():
     pass
@@ -107,10 +108,26 @@ def game_results():
 
 def tutorial_page():
     """Switches the introduction page to the tuturial page in which Card Counting instructions are given."""
+    global card_counting_intro, button_intro
+    button_intro.destroy()
+    card_counting_intro = Button(window,
+                                 font='Lato',
+                                 background='black', fg='white',
+                                     text="Card counting is a blackjack strategy used to determine when the player has an\n" \
+                                          "advantage on the next hand by keeping a 'count' of the hand.\n" \
+                                          "A player bets more on a higher(positive) count and less on a low(negative) count.\n\n" \
+                                          "This is the KISS2 method, in which the player counts - \n" \
+                                          " - Always start with a count of zero, and on new decks. \n" \
+                                          " - Subtract by 1 when you see a K, Q, or J\n" \
+                                          " - Add by 1 when you see a 4, 5, 6, or black 2\n"\
+                                          " - Ignore these: Aces, Red 2, 3, 7, 8, 9, or 10.\n\n"\
+                                          " A tutorial will be made accesible in game.\n"\
+                                          "(Click here to continue)",
+                                     command=game_page())
+    card_counting_intro.place(x=250,y=200)
 
-def __init__():
+def intro_window():
     """This is the initial function that will be called upon to initialize the application through tkinter."""
-    # Make all buttons global for deletion in next functions
     global window, background_label_intro, button_intro
 
     # Create the Tkinter window and give it its repective properties. Window title, background image, text (button)
@@ -125,17 +142,17 @@ def __init__():
 
     button_intro = Button(window,
                         font='Lato',
-                        background='#004000', fg='white',
+                        background='white', fg='black',
                         text=   'Welcome to Card Counting Boot Camp!\n'
                                 'You should already have an understanding of how\n'
                                 'to play BlackJack\n'
                                 '\n'
                                 'This program simply exists to help you win more money\n'
-                                '(click to continue)',
-                        command = tutorial_page())
-    button_intro.place(x=400, y=200)
+                                '(click here to continue)',
+                        command = tutorial_page)
+    button_intro.place(x=380, y=200)
 
     # Call window to run tkinter
     window.mainloop()
 
-__init__()
+intro_window()
