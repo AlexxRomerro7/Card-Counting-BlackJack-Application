@@ -49,23 +49,43 @@ def money_change(total_money):
 
 def bet1():
     """Increases bet value by $1."""
-    pass
+    global bet_value, total_money
+    total_money -= 1
+    bet_value += 1
+    bet_change(bet_value)
+    money_change(total_money)
 
 def bet5():
     """Increases bet value by $5."""
-    pass
+    global bet_value, total_money
+    total_money -= 5
+    bet_value += 5
+    bet_change(bet_value)
+    money_change(total_money)
 
 def bet10():
     """Increase bet value by $10."""
-    pass
+    global bet_value, total_money
+    total_money -= 10
+    bet_value += 10
+    bet_change(bet_value)
+    money_change(total_money)
 
 def bet25():
     """Increase bet value by $25."""
-    pass
+    global bet_value, total_money
+    total_money -= 25
+    bet_value += 25
+    bet_change(bet_value)
+    money_change(total_money)
 
 def bet100():
     """Increase bet value by $100."""
-    pass
+    global bet_value, total_money
+    total_money -= 100
+    bet_value += 100
+    bet_change(bet_value)
+    money_change(total_money)
 
 def deal_cards():
     """Initiates game play by dealing 2 card to each player. 1 dealer card face down."""
@@ -160,7 +180,6 @@ def chip_buttons():
     global poker1_label, poker5_label, poker10_label, poker25_label, poker100_label
     chip_setup = Frame(window, background='#004000')
     chip_setup.place(x=880, y=640)
-
     chip_frame = LabelFrame(chip_setup, background='#004000', bd=0)
     chip_frame.grid(row=0, column=0)  # , padx=20, ipadx=20)
 
@@ -240,6 +259,7 @@ def game_page():
     labrl.photo = img
     labrl.place(x=0, y=0, relwidth=1, relheight=1)
 
+    # Call functions that create the gameplay user interface
     player_actions_buttons()
     chip_buttons()
     player_card_labels()
@@ -273,6 +293,7 @@ def game_page():
                              background='#004000', fg='white')
     money_value_show.place(x=900,y=600)
 
+    # Call bet function to start the game. 
     place_bets()
 
 
