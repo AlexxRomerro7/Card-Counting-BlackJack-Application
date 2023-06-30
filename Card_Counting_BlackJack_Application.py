@@ -39,13 +39,13 @@ def place_bets():
     """Locks user into placing a bet without access to any other buttons without a bet."""
     pass
 
-def bet_change():
+def bet_change(bet_value):
     """Changes display of how much the user has bet upon final bet."""
-    pass
+    bet_value_string.set('Current Bet: ' + str(bet_value))
 
-def money_change():
+def money_change(total_money):
     """Changes display of money left."""
-    pass
+    money_value_string.set('Money: ' + str(total_money))
 
 def bet1():
     """Increases bet value by $1."""
