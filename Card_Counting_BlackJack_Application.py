@@ -15,7 +15,7 @@ import os
 global deck
 deck = ["king_spades"]
 def create_deck():
-    """Gives the user a new deck, should be called upon in any function where cards are dealt."""
+    """Gives the player a new deck, should be called upon in any function where cards are dealt."""
     # Create a deck with all cards & faces. Only have to create the list once and multiply by one
     global deck
     global cards
@@ -102,7 +102,7 @@ def hint():
     count_button.pack()
 
 def tutorial_button():
-    """Button that gives brief tutorial on card counting, readily available for the user at all times."""
+    """Button that gives brief tutorial on card counting, readily available for the player at all times."""
     pass
 
 def face_down_card():
@@ -114,12 +114,38 @@ def face_down_card():
     card_cover_image.photo = card_cover_image
 
 def stand():
-    """User choice of no longer receiving cards, initializing dealer play and halting all player buttons."""
+    """Player choice of no longer receiving cards, initializing dealer play and halting all player buttons."""
     pass
 
 def player_hit():
-    """Gives the user one more card."""
-    pass
+    """Gives the player one more card."""
+    global player_spot, player_hand_value
+    if player_spot < 5:
+        create_deck()
+        new_card = random.choice(deck)
+        deck.remove(new_card)
+        player.append(new_card)
+        card_values(new_card)
+        player_hand_value += value
+        if player_spot == 3:
+            player_card3 = card_faces(player[2])
+            player_box3.config(image=player_card3)
+            player_spot += 1
+            busted()
+        elif player_spot == 4:
+            player_card4 = card_faces(player[3])
+            player_box4.config(image=player_card4)
+            player_spot += 1
+            busted()
+        elif player_spot == 5:
+            player_card5 = card_faces(player[4])
+            player_box5.config(image=player_card5)
+            bet_value = bet_value * 2
+            total_money += bet_value
+            outcome_string = "Congratulations, you won this round!"
+            game_results(outcome_string)
+            busted()
+    blackjack()
 
 def dealer_hit():
     """Allows dealer to hit IF the dealer respective value is less than 17."""
@@ -146,13 +172,13 @@ def game_results():
     pass
 
 def deal_cards():
-    # Clear cards from user & dealer list
+    # Clear cards from player & dealer list
     face_down_card()
-    global user, dealer
-    user = []
+    global player, dealer
+    player = []
     dealer = []
 
-    # Update user button availability
+    # Update player button availability
     hit_button.config(state='normal')
     stand_button.config(state='normal')
     bet_button.config(state='disabled')
@@ -163,8 +189,8 @@ def deal_cards():
     poker25_label.config(state='disabled')
     poker100_label.config(state='disabled')
 
-    # Deal out two cards to both the user and dealer. Assign values, count, and photos.
-    global dealer_hand_value, user_hand_value, running_count, player_spot, dealer_spot
+    # Deal out two cards to both the player and dealer. Assign values, count, and photos.
+    global dealer_hand_value, player_hand_value, running_count, player_spot, dealer_spot
     dealer_hand = random.choices(deck, k = 2 )
     dealer_hand_value = 0
     dealer_spot = 3
@@ -174,28 +200,28 @@ def deal_cards():
         card_values(card)
         deck.remove(card)
         dealer_hand_value += value
-    user_hand = random.choices(deck, k = 2 )
-    user_hand_value = 0
-    user_spot = 0
-    for card in user_hand:
+    player_hand = random.choices(deck, k = 2 )
+    player_hand_value = 0
+    player_spot = 3
+    for card in player_hand:
         create_deck()
-        user.append(card)
+        player.append(card)
         card_values(card)
         deck.remove(card)
-        user_hand_value += value
+        player_hand_value += value
     dealer_box1.config(image= card_cover_image)
     dealer_card2 = card_faces(dealer[1])
     dealer_box2.config(image=dealer_card2)
-    user_card1 = card_faces(user[0])
-    player_box1.config(image=user_card1)
-    user_card2 = card_faces(user[1])
-    player_box2.config(image=user_card2)
+    player_card1 = card_faces(player[0])
+    player_box1.config(image=player_card1)
+    player_card2 = card_faces(player[1])
+    player_box2.config(image=player_card2)
 
-    #user_black_jack()
+    #player_black_jack()
 
 def place_bets():
-    """Locks user into placing a bet without access to any other buttons without a bet."""
-    # Disable all other buttons besides betting buttons to force user into betting.
+    """Locks player into placing a bet without access to any other buttons without a bet."""
+    # Disable all other buttons besides betting buttons to force player into betting.
     bet_button.config(state= 'normal')
     hit_button.config(state='disabled')
     stand_button.config(state='disabled')
@@ -206,7 +232,7 @@ def place_bets():
     poker25_label.config(state='normal')
     poker100_label.config(state='normal')
 
-    # Clear all cards so user has clear table.
+    # Clear all cards so player has clear table.
     dealer_box1.configure(image='')
     dealer_box2.configure(image='')
     dealer_box3.configure(image='')
@@ -218,21 +244,21 @@ def place_bets():
     player_box4.configure(image='')
     player_box5.configure(image='')
 
-    # Check for values to keep user locked in window.
+    # Check for values to keep player locked in window.
     if bet_value != 0:
         deal_button.config(state='normal')
     if total_money < 0:
         debt_notice = Toplevel()
         debt_notice.title('Debt Notice')
         debt_notice_string = 'You are now taking out loans against your house.'
-        user_won_button = Button(debt_notice,
+        player_won_button = Button(debt_notice,
                                  text=debt_notice_string, font='Lato',
                                  background='#004000', fg='white')
-        user_won_button.pack()
+        player_won_button.pack()
 
 
 def bet_change(bet_value):
-    """Changes display of how much the user has bet upon final bet."""
+    """Changes display of how much the player has bet upon final bet."""
     bet_value_string.set('Current Bet: ' + str(bet_value))
 
 def money_change(total_money):
@@ -380,7 +406,7 @@ def player_actions_buttons():
     """Creates frame and respective buttons associated with player actions"""
     global hit_button, stand_button, bet_button, deal_button
 
-    # Create frame centered in the middle of the window where user actions(buttons) related to playing will be.
+    # Create frame centered in the middle of the window where player actions(buttons) related to playing will be.
     # This includes hit(add card), stand(let dealer play), bet(placing a pre-game bet), dealing(new set of cards post game)
     actions_frame = Frame(window, background='')
     actions_frame.place(x=480, y=250)
@@ -399,11 +425,11 @@ def player_actions_buttons():
 
 
 def game_page():
-    """Game window the user will play on. Initiates stand alone buttons and functions holding buttons the player will use"""
+    """Game window the player will play on. Initiates stand alone buttons and functions holding buttons the player will use"""
     global card_counting_intro, labrl, bet_value, total_money
     global bet_value_show,bet_value_string, money_value_string
 
-    # Automatically starts the game for the user. Introduce new window
+    # Automatically starts the game for the player. Introduce new window
     card_counting_intro.destroy()
     background_label_intro.destroy()
     window.title('Card Counting Boot Camp')
@@ -415,13 +441,13 @@ def game_page():
     labrl.photo = img
     labrl.place(x=0, y=0, relwidth=1, relheight=1)
 
-    # Call functions that create the gameplay user interface
+    # Call functions that create the gameplay player interface
     player_actions_buttons()
     chip_buttons()
     player_card_labels()
     dealer_card_labels()
 
-    # Create hint and tutorial buttons accesible to the user at all time. 
+    # Create hint and tutorial buttons accesible to the player at all time. 
     hint_button = tkinter.Button(window,
                                  text='Hint (Show Count)',
                                  font = 'Lato', background='#004000', fg='white', command = hint)
@@ -433,7 +459,7 @@ def game_page():
                                      background='#004000', fg='white')
     tutorial_button.place(x=0,y=680)
 
-    # Give user repective bet value and money values available. Also initial values.
+    # Give player repective bet value and money values available. Also initial values.
     bet_value = 0
     total_money = 1000
 
@@ -455,7 +481,7 @@ def game_page():
 
 def tutorial_page():
     """Switches the introduction page to the tuturial page in which Card Counting instructions are given."""
-    # Destroy previous button, create new button that displays Card Counting tutorial for user. Take user to game.
+    # Destroy previous button, create new button that displays Card Counting tutorial for player. Take player to game.
     global card_counting_intro, button_intro
     button_intro.destroy()
     card_counting_intro = Button(window,
