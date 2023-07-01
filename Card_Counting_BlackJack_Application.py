@@ -19,6 +19,9 @@ def tutorial_button():
     """Button that gives brief tutorial on card counting, readily available for the user at all times."""
     pass
 
+# Create low deck outside of function so it automatically sets a new deck.
+global deck
+deck = ["king_spades"]
 def create_deck():
     """Gives the user a new deck, should be called upon in any function where cards are dealt."""
     # Create a deck with all cards & faces. Only have to create the list once and multiply by one
@@ -42,9 +45,49 @@ def create_deck():
                                  background='#004000', fg='white')
         deck_Shuffle_button.pack()
 
-def card_values():
+def card_values(card):
     """Assigns values to all cards that are dealt out."""
-    pass
+        global value
+    value = 0
+    global running_count
+    if any(x in card for x in ["ace_spades", "ace_hearts", "ace_clubs", "ace_diamonds"]):
+        value += 11
+        running_count += 0
+    elif any(x in card for x in ["two_spades", "two_clubs"]):
+        value += 2
+        running_count += 1
+    elif any(x in card for x in ["two_hearts", "two_diamonds"]):
+        value += 2
+        running_count += 0
+    elif any(x in card for x in ["three_spades", "three_hearts", "three_clubs", "three_diamonds"]):
+        value += 3
+        running_count += 0
+    elif any(x in card for x in ["four_spades", "four_hearts", "four_clubs", "four_diamonds"]):
+        value += 4
+        running_count += 1
+    elif any(x in card for x in ["five_spades", "five_hearts", "five_clubs", "five_diamonds"]):
+        value += 5
+        running_count += 1
+    elif any(x in card for x in ["six_spades", "six_hearts", "six_clubs", "six_diamonds"]):
+        value += 6
+        running_count += 1
+    elif any(x in card for x in ["seven_spades", "seven_hearts", "seven_clubs", "seven_diamonds"]):
+        value += 7
+        running_count += 0
+    elif any(x in card for x in ["eight_spades", "eight_hearts", "eight_clubs", "eight_diamonds"]):
+        value += 8
+        running_count += 0
+    elif any(x in card for x in ["nine_spades", "nine_hearts", "nine_clubs", "nine_diamonds"]):
+        value += 9
+        running_count += 0
+    elif any(x in card for x in ["ten_spades", "ten_hearts", "ten_clubs", "ten_diamonds"]):
+        value += 10
+        running_count += 0
+    elif any(x in card for x in ["jack_spades", "jack_hearts", "jack_clubs", "jack_diamonds",
+                                 "queen_spades", "queen_hearts", "queen_clubs", "queen_diamonds",
+                                 "king_spades", "king_hearts", "king_clubs", "king_diamonds"]):
+        value += 10
+        running_count -= 1
 
 def card_faces():
     """Assigns card faces to each card dealt."""
@@ -52,9 +95,6 @@ def card_faces():
 
 def face_down_card():
     """Runs code for the Dealer's faced down card"""
-    pass
-
-def deal_cards():
     pass
 
 def stand():
@@ -87,6 +127,9 @@ def dealer_card_reveal():
 
 def game_results():
     """Gives a pop up window showing game results"""  
+    pass
+
+def deal_cards():
     pass
 
 def place_bets():
