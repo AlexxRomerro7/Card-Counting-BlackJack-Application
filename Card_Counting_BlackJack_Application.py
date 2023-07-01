@@ -37,6 +37,7 @@ def create_deck():
                                  background='#004000', fg='white')
         deck_Shuffle_button.pack()
 
+running_count = 0
 def card_values(card):
     """Assigns values to all cards that are dealt out."""
     global value
@@ -99,7 +100,11 @@ def tutorial_button():
 
 def face_down_card():
     """Runs code for the Dealer's faced down card"""
-    pass
+    global card_cover_image
+    card_cover_image = Image.open("C:\\Users\\alexr\\Pictures\\playing_card_cover.png")
+    card_cover_image = card_cover_image.resize((50, 75))
+    card_cover_image = ImageTk.PhotoImage(card_cover_image)
+    card_cover_image.photo = card_cover_image
 
 def stand():
     """User choice of no longer receiving cards, initializing dealer play and halting all player buttons."""
@@ -134,7 +139,52 @@ def game_results():
     pass
 
 def deal_cards():
-    pass
+    # Clear cards from user & dealer list
+    face_down_card()
+    global user, dealer
+    user = []
+    dealer = []
+
+    # Update user button availability
+    hit_button.config(state='normal')
+    stand_button.config(state='normal')
+    bet_button.config(state='disabled')
+    deal_button.config(state='disabled')
+    poker1_label.config(state='disabled')
+    poker5_label.config(state='disabled')
+    poker10_label.config(state='disabled')
+    poker25_label.config(state='disabled')
+    poker100_label.config(state='disabled')
+
+    # Deal out two cards to both the user and dealer. Assign values, count, and photos.
+    global dealer_hand_value, user_hand_value, running_count, player_spot, dealer_spot
+    dealer_hand = random.choices(deck, k = 2 )
+    dealer_hand_value = 0
+    dealer_spot = 3
+    for card in dealer_hand:
+        create_deck()
+        dealer.append(card)
+        card_values(card)
+        deck.remove(card)
+        dealer_hand_value += value
+    user_hand = random.choices(deck, k = 2 )
+    user_hand_value = 0
+    user_spot = 0
+    for card in user_hand:
+        create_deck()
+        user.append(card)
+        card_values(card)
+        deck.remove(card)
+        user_hand_value += value
+    dealer_box1.config(image= card_cover_image)
+    dealer_card2 = card_faces(dealer[1])
+    dealer_box2.config(image=dealer_card2)
+    user_card1 = card_faces(user[0])
+    player_box1.config(image=user_card1)
+    user_card2 = card_faces(user[1])
+    player_box2.config(image=user_card2)
+
+    #user_black_jack()
 
 def place_bets():
     """Locks user into placing a bet without access to any other buttons without a bet."""
