@@ -21,7 +21,26 @@ def tutorial_button():
 
 def create_deck():
     """Gives the user a new deck, should be called upon in any function where cards are dealt."""
-    pass
+    # Create a deck with all cards & faces. Only have to create the list once and multiply by one
+    global deck
+    global cards
+    if len(deck) < 10:
+        cards = ["ace_spades", "ace_hearts", "ace_clubs", "ace_diamonds","two_spades", "two_hearts", "two_clubs", "two_diamonds",
+                "three_spades", "three_hearts", "three_clubs", "three_diamonds", "four_spades", "four_hearts", "four_clubs", "four_diamonds",
+                "five_spades", "five_hearts", "five_clubs", "five_diamonds", "six_spades", "six_hearts", "six_clubs", "six_diamonds",
+                "seven_spades", "seven_hearts", "seven_clubs", "seven_diamonds", "eight_spades", "eight_hearts", "eight_clubs", "eight_diamonds",
+                "nine_spades", "nine_hearts", "nine_clubs", "nine_diamonds", "ten_spades", "ten_hearts", "ten_clubs", "ten_diamonds",
+                "jack_spades", "jack_hearts", "jack_clubs", "jack_diamonds", "queen_spades", "queen_hearts", "queen_clubs", "queen_diamonds",
+                "king_spades", "king_hearts", "king_clubs", "king_diamonds"]
+        deck = cards * 2
+        running_count = 0
+        deck_Shuffle = Toplevel()
+        deck_Shuffle.title('Deck status')
+        deck_Shuffle_String = 'New deck has been given'
+        deck_Shuffle_button = Button(deck_Shuffle,
+                                 text=deck_Shuffle_String, font='Lato',
+                                 background='#004000', fg='white')
+        deck_Shuffle_button.pack()
 
 def card_values():
     """Assigns values to all cards that are dealt out."""
@@ -33,6 +52,41 @@ def card_faces():
 
 def face_down_card():
     """Runs code for the Dealer's faced down card"""
+    pass
+
+def deal_cards():
+    pass
+
+def stand():
+    """User choice of no longer receiving cards, initializing dealer play and halting all player buttons."""
+    pass
+
+def player_hit():
+    """Gives the user one more card."""
+    pass
+
+def dealer_hit():
+    """Allows dealer to hit IF the dealer respective value is less than 17."""
+    pass
+
+def busted():
+    """Checks for both Player and Dealer bust upon Stand or Hit"""
+    pass
+
+def blackjack():
+    """Checks for Blackjack for both the Player and Dealer"""
+    pass
+
+def winner():
+    """Checks for who won the game if Blackjack isn't achieved by Player or Dealer"""
+    pass
+
+def dealer_card_reveal():
+    """Displays the turned over Dealer card as its respective card"""
+    pass
+
+def game_results():
+    """Gives a pop up window showing game results"""  
     pass
 
 def place_bets():
@@ -120,42 +174,6 @@ def bet100():
     bet_value += 100
     bet_change(bet_value)
     money_change(total_money)
-
-def deal_cards():
-    """Initiates game play by dealing 2 card to each player. 1 dealer card face down."""
-    pass
-
-def stand():
-    """User choice of no longer receiving cards, initializing dealer play and halting all player buttons."""
-    pass
-
-def player_hit():
-    """Gives the user one more card."""
-    pass
-
-def dealer_hit():
-    """Allows dealer to hit IF the dealer respective value is less than 17."""
-    pass
-
-def busted():
-    """Checks for both Player and Dealer bust upon Stand or Hit"""
-    pass
-
-def blackjack():
-    """Checks for Blackjack for both the Player and Dealer"""
-    pass
-
-def winner():
-    """Checks for who won the game if Blackjack isn't achieved by Player or Dealer"""
-    pass
-
-def dealer_card_reveal():
-    """Displays the turned over Dealer card as its respective card"""
-    pass
-
-def game_results():
-    """Gives a pop up window showing game results"""  
-    pass
 
 
 def dealer_card_labels():
