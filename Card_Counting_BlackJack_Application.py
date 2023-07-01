@@ -92,7 +92,14 @@ def card_faces(img):
 
 def hint():
     """Button that displays the current count value of the deck."""
-    pass
+    global hint_window, count_button
+    hint_window = Toplevel()
+    hint_window.title('Current Count')
+    count_string = f'The current count is {running_count}'
+    count_button = Button(hint_window,
+                          text= count_string,font = 'Lato',
+                          background='#004000', fg='white')
+    count_button.pack()
 
 def tutorial_button():
     """Button that gives brief tutorial on card counting, readily available for the user at all times."""
