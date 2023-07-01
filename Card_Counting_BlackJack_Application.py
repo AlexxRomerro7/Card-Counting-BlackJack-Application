@@ -11,14 +11,6 @@ from PIL import Image, ImageTk
 from tkinter import ttk, font
 import os
 
-def hint():
-    """Button that displays the current count value of the deck."""
-    pass
-
-def tutorial_button():
-    """Button that gives brief tutorial on card counting, readily available for the user at all times."""
-    pass
-
 # Create low deck outside of function so it automatically sets a new deck.
 global deck
 deck = ["king_spades"]
@@ -47,7 +39,7 @@ def create_deck():
 
 def card_values(card):
     """Assigns values to all cards that are dealt out."""
-        global value
+    global value
     value = 0
     global running_count
     if any(x in card for x in ["ace_spades", "ace_hearts", "ace_clubs", "ace_diamonds"]):
@@ -89,8 +81,20 @@ def card_values(card):
         value += 10
         running_count -= 1
 
-def card_faces():
+def card_faces(img):
     """Assigns card faces to each card dealt."""
+    card_image = Image.open(f"C:\\Users\\alexr\\Pictures\\{img}.jpg")
+    card_image = card_image.resize((50, 75))
+    card_image = ImageTk.PhotoImage(card_image)
+    card_image.photo = card_image
+    return card_image
+
+def hint():
+    """Button that displays the current count value of the deck."""
+    pass
+
+def tutorial_button():
+    """Button that gives brief tutorial on card counting, readily available for the user at all times."""
     pass
 
 def face_down_card():
