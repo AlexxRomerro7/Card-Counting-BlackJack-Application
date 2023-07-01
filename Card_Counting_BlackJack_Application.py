@@ -37,7 +37,41 @@ def face_down_card():
 
 def place_bets():
     """Locks user into placing a bet without access to any other buttons without a bet."""
-    pass
+    # Disable all other buttons besides betting buttons to force user into betting.
+    bet_button.config(state= 'normal')
+    hit_button.config(state='disabled')
+    stand_button.config(state='disabled')
+    deal_button.config(state='disabled')
+    poker1_label.config(state= 'normal')
+    poker5_label.config(state='normal')
+    poker10_label.config(state='normal')
+    poker25_label.config(state='normal')
+    poker100_label.config(state='normal')
+
+    # Clear all cards so user has clear table.
+    dealer_box1.configure(image='')
+    dealer_box2.configure(image='')
+    dealer_box3.configure(image='')
+    dealer_box4.configure(image='')
+    dealer_box5.configure(image='')
+    player_box1.configure(image='')
+    player_box2.configure(image='')
+    player_box3.configure(image='')
+    player_box4.configure(image='')
+    player_box5.configure(image='')
+
+    # Check for values to keep user locked in window.
+    if bet_value != 0:
+        deal_button.config(state='normal')
+    if total_money < 0:
+        debt_notice = Toplevel()
+        debt_notice.title('Debt Notice')
+        debt_notice_string = 'You are now taking out loans against your house.'
+        user_won_button = Button(debt_notice,
+                                 text=debt_notice_string, font='Lato',
+                                 background='#004000', fg='white')
+        user_won_button.pack()
+
 
 def bet_change(bet_value):
     """Changes display of how much the user has bet upon final bet."""
