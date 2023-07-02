@@ -115,7 +115,11 @@ def face_down_card():
 
 def stand():
     """Player choice of no longer receiving cards, initializing dealer play and halting all player buttons."""
-    pass
+    dealer_card_reveal()
+    dealer_hit()
+    dealer_hit()
+    dealer_hit()
+    winner()
 
 def player_hit():
     """Gives the player one more card."""
@@ -217,7 +221,7 @@ def deal_cards():
     player_card2 = card_faces(player[1])
     player_box2.config(image=player_card2)
 
-    #player_black_jack()
+    # black_jack()
 
 def place_bets():
     """Locks player into placing a bet without access to any other buttons without a bet."""
