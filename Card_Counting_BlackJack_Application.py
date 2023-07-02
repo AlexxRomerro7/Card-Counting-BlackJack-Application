@@ -184,7 +184,29 @@ def busted():
 
 def blackjack():
     """Checks for Blackjack for both the Player and Dealer"""
-    pass
+    global bet_value, total_money, dealer
+    if player_hand_value == 21 and dealer_hand_value == 21:
+        dealer_card_reveal()
+        total_money += bet_value
+        money_change(total_money)
+        bet_value = 0
+        outcome_string = 'You and the dealer tied!'
+        game_results(outcome_string)
+
+    elif player_hand_value == 21 and dealer_hand_value < 21:
+        dealer_card_reveal()
+        bet_value = bet_value*2
+        total_money += bet_value
+        money_change(total_money)
+        bet_value = 0
+        outcome_string = "Blackjack, you won!"
+        game_results(outcome_string)
+
+    elif player_hand_value < 21 and dealer_hand_value == 21:
+        dealer_card_reveal()
+        bet_value = 0
+        outcome_string = "You lost this hand, better luck next time!"
+        game_results(outcome_string)
 
 def winner():
     """Checks for who won the game if Blackjack isn't achieved by Player or Dealer"""
