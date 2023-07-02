@@ -153,7 +153,30 @@ def player_hit():
 
 def dealer_hit():
     """Allows dealer to hit IF the dealer respective value is less than 17."""
-    pass
+    create_deck()
+    global dealer_hand_value, dealer_spot
+    dealer_hand = random.choice(deck)
+    if dealer_hand_value < 17:
+        dealer_card = random.choice(deck)
+        dealer.append(dealer_card)
+        card_values(dealer_card)
+        deck.remove(dealer_card)
+        dealer_hand_value += value
+        if dealer_spot == 3:
+            dealer_card3 = card_faces(dealer[2])
+            dealer_box3.config(image = dealer_card3)
+            dealer_spot += 1
+            busted()
+        elif dealer_spot == 4:
+            dealer_card4 = card_faces(dealer[3])
+            dealer_box4.config(image = dealer_card4)
+            dealer_spot += 1
+            busted()
+        elif dealer_spot == 5:
+            dealer_card_reveal()
+            outcome_string = "You lost this hand, better luck next time!"
+            game_results(outcome_string)
+            busted()
 
 def busted():
     """Checks for both Player and Dealer bust upon Stand or Hit"""
@@ -165,15 +188,65 @@ def blackjack():
 
 def winner():
     """Checks for who won the game if Blackjack isn't achieved by Player or Dealer"""
-    pass
+    global player_hand_value, dealer_hand_value, bet_value, total_money
+    # player win, Dealer lost
+    if player_hand_value > dealer_hand_value and player_hand_value <= 21:
+        dealer_card_reveal()
+        bet_value = bet_value*2
+        total_money += bet_value
+        money_change(total_money)
+        bet_value = 0
+        outcome_string = "Congratulations, you won this hand!"
+        game_results(outcome_string)
+    # player lost, Dealer won
+    elif player_hand_value < dealer_hand_value and dealer_hand_value <= 21:
+        dealer_card_reveal()
+        bet_value = 0
+        outcome_string = "You lost this hand, better luck next time!"
+        game_results(outcome_string)
+    # User & Dealer tie
+    elif player_hand_value == dealer_hand_value:
+        bet_value = 0
+        dealer_card_reveal()
+        total_money += bet_value
+        money_change(total_money)
+        outcome_string = 'You and the dealer tied!'
+        game_results(outcome_string)
 
 def dealer_card_reveal():
     """Displays the turned over Dealer card as its respective card"""
-    pass
+    global dealer_box1, dealer_box2, player_box1, player_box2
+    dealer_card1 = card_faces(dealer[0])
+    dealer_box1.config(image=dealer_card1)
+    dealer_card2 = card_faces(dealer[1])
+    dealer_box2.config(image=dealer_card2)
+    user_card1 = card_faces(player[0])
+    player_box1.config(image=user_card1)
+    user_card2 = card_faces(player[1])
+    player_box2.config(image=user_card2)
 
-def game_results():
+def game_results(outcome_string):
     """Gives a pop up window showing game results"""  
-    pass
+    global bet_value
+    dealer_card_reveal()
+    bet_value = 0
+    bet_change(bet_value)
+    global user_won_window
+    hit_button.config(state='disabled')
+    stand_button.config(state='disabled')
+    bet_button.config(state='normal')
+    deal_button.config(state='disabled')
+    poker1_label.config(state='disabled')
+    poker5_label.config(state='disabled')
+    poker10_label.config(state='disabled')
+    poker25_label.config(state='disabled')
+    poker100_label.config(state='disabled')
+    user_won_window = Toplevel()
+    user_won_window.title('Game outcome')
+    user_won_button = Button(user_won_window,
+                             text=outcome_string, font='Lato',
+                             background='#004000', fg='white')
+    user_won_button.pack()
 
 def deal_cards():
     # Clear cards from player & dealer list
