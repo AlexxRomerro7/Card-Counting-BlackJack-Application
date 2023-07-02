@@ -180,7 +180,28 @@ def dealer_hit():
 
 def busted():
     """Checks for both Player and Dealer bust upon Stand or Hit"""
-    pass
+    global player_hand_value, dealer_hand_value, bet_value, total_money
+    for card in player:
+        if card in ["ace_spades", "ace_hearts", "ace_clubs", "ace_diamonds"] and user_hand_value > 21:
+            player_hand_value -= 10
+    for card in dealer:
+        if card in ["ace_spades", "ace_hearts", "ace_clubs", "ace_diamonds"] and dealer_hand_value > 21:
+            dealer_hand_value -= 10
+    if player_hand_value > 21:
+        bet_value = 0
+        bet_change(bet_value)
+        outcome_string = "You busted, better luck next time!"
+        game_results(outcome_string)
+        dealer_card_reveal()
+    elif dealer_hand_value > 21:
+        bet_value = bet_value*2
+        total_money += bet_value
+        money_change(total_money)
+        bet_value = 0
+        bet_change(bet_value)
+        outcome_string = "Congratulations, you won this round!"
+        dealer_card_reveal()
+        game_results(outcome_string)
 
 def blackjack():
     """Checks for Blackjack for both the Player and Dealer"""
