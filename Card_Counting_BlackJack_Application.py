@@ -1,7 +1,5 @@
 # Alex Romero
 # Created on 6/28/2023
-import sys  
-print(sys.executable)
 
 # Import Random for the random selection of cards when dealing. Import TKinter for GUI
 import random
@@ -9,6 +7,8 @@ import tkinter
 from tkinter import *
 from PIL import Image, ImageTk
 from tkinter import ttk, font
+import os
+img_directory = os.getcwd()
 
 # Create low deck outside of function so it automatically sets a new deck.
 global deck
@@ -83,7 +83,7 @@ def card_values(card):
 
 def card_faces(img):
     """Assigns card faces to each card dealt."""
-    card_image = Image.open(f"C:\\Users\\alexr\\Pictures\\{img}.jpg")
+    card_image = Image.open(f"{img_directory}\\{img}.jpg")
     card_image = card_image.resize((50, 75))
     card_image = ImageTk.PhotoImage(card_image)
     card_image.photo = card_image
@@ -107,7 +107,7 @@ def tutorial_button():
 def face_down_card():
     """Runs code for the Dealer's faced down card"""
     global card_cover_image
-    card_cover_image = Image.open("C:\\Users\\alexr\\Pictures\\playing_card_cover.png")
+    card_cover_image = Image.open(f"{img_directory}\\playing_card_cover.png")
     card_cover_image = card_cover_image.resize((50, 75))
     card_cover_image = ImageTk.PhotoImage(card_cover_image)
     card_cover_image.photo = card_cover_image
@@ -334,7 +334,7 @@ def deal_cards():
     player_card2 = card_faces(player[1])
     player_box2.config(image=player_card2)
 
-    # black_jack()
+    blackjack()
 
 def place_bets():
     """Locks player into placing a bet without access to any other buttons without a bet."""
@@ -482,35 +482,35 @@ def chip_buttons():
     chip_frame = LabelFrame(chip_setup, background='#004000', bd=0)
     chip_frame.grid(row=0, column=0)  # , padx=20, ipadx=20)
 
-    pokerchip1 = Image.open("C:\\Users\\alexr\\Pictures\\1yingyang.jpg")
+    pokerchip1 = Image.open(f'{img_directory}\\pokerchip1.jpg')
     pokerchip1 = pokerchip1.resize((60,60))
     pokerchip1 = ImageTk.PhotoImage(pokerchip1)
     poker1_label = Button(chip_frame, image = pokerchip1,command=bet1, border=0)
     poker1_label.photo = pokerchip1
     poker1_label.grid(row=0,column=0,pady=10,padx=1)
 
-    pokerchip5 = Image.open("C:\\Users\\alexr\\Pictures\\5yingyang.jpg")
+    pokerchip5 = Image.open(f'{img_directory}\\pokerchip5.jpg')
     pokerchip5 = pokerchip5.resize((60,60))
     pokerchip5 = ImageTk.PhotoImage(pokerchip5)
     poker5_label = Button(chip_frame, image = pokerchip5,command=bet5, border=0)
     poker5_label.photo = pokerchip5
     poker5_label.grid(row=0, column=1, pady=10,padx=1)
 
-    pokerchip10 = Image.open("C:\\Users\\alexr\\Pictures\\10yingyang.jpg")
+    pokerchip10 = Image.open(f'{img_directory}\\pokerchip10.jpg')
     pokerchip10 = pokerchip10.resize((60,60))
     pokerchip10 = ImageTk.PhotoImage(pokerchip10)
     poker10_label = Button(chip_frame, image = pokerchip10,command=bet10, border=0)
     poker10_label.photo = pokerchip10
     poker10_label.grid(row=0, column=2, pady=10,padx=1)
 
-    pokerchip25 = Image.open("C:\\Users\\alexr\\Pictures\\25yingyang.jpg")
+    pokerchip25 = Image.open(f'{img_directory}\\pokerchip25.jpg')
     pokerchip25 = pokerchip25.resize((60,60))
     pokerchip25 = ImageTk.PhotoImage(pokerchip25)
     poker25_label = Button(chip_frame, image = pokerchip25,command=bet25, border=0)
     poker25_label.photo = pokerchip25
     poker25_label.grid(row=0, column=3, pady=10, padx=1)
 
-    pokerchip100 = Image.open("C:\\Users\\alexr\\Pictures\\100yingyang.jpg")
+    pokerchip100 = Image.open(f'{img_directory}\\pokerchip100.jpg')
     pokerchip100 = pokerchip100.resize((60,60))
     pokerchip100 = ImageTk.PhotoImage(pokerchip100)
     poker100_label = Button(chip_frame, image = pokerchip100,command=bet100, border=0)
@@ -551,7 +551,8 @@ def game_page():
     background_label_intro.destroy()
     window.title('Card Counting Boot Camp')
 
-    img = Image.open("C:/Users/alexr/Pictures/Table_with_chair.jpg")
+    #img = Image.open("C:/Users/alexr/Pictures/Table_with_chair.jpg")
+    img = Image.open(f'{img_directory}\\Table_with_chair.jpg')
     img = img.resize((1200,720))
     img = ImageTk.PhotoImage(img)
     labrl = Label(window, image=img)
@@ -626,7 +627,8 @@ def intro_window():
     window = Tk()
     window.title('Card Counting Boot Camp Tutorial')
     window.geometry('1200x720')
-    background_image_intro = Image.open('C:/Users/alexr/Pictures/CardsOnTable.jpg')
+    background_image_intro = Image.open(f'{img_directory}\\CardsOnTable.jpg')
+    #     background_image_intro = Image.open('C:/Users/alexr/Pictures/CardsOnTable.jpg')
     background_image_intro = background_image_intro.resize((1200, 720))
     background_intro = ImageTk.PhotoImage(background_image_intro)
     background_label_intro = Label(window, image=background_intro)
