@@ -9,7 +9,6 @@ import tkinter
 from tkinter import *
 from PIL import Image, ImageTk
 from tkinter import ttk, font
-import os
 
 # Create low deck outside of function so it automatically sets a new deck.
 global deck
